@@ -1,0 +1,227 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+<!--<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>-->
+ <!--background: white url("images/background.png") no-repeat;
+ src="{% static 'mainapp/images/logo/krpch_right.svg' %}"
+ background: url('mainapp/images/head_im_bg.webp') no-repeat;
+ -->
+{% block header_image %}
+  <!--    background-image: url('https://image.api.playstation.com/vulcan/ap/rnd/202009/1513/1SzCPUj3L9cZqxgmprMCjPqc.jpg');-->
+    <div
+    class="p-0 text-center bg-image"
+    style="
+      background-image: url('{% static 'mainapp/images/head_im_bg_1500x600.webp' %}');
+      background-size: 1500px;
+      height: 600px;
+      width: auto;
+    "
+  >
+    <div class="mask" style="background-color: rgba(5,39,0, 0.4);">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h4 class="mb-3">КЛУБ ШАНУВАЛЬНИКІВ РИБНОЇ ЛОВЛІ</h4>
+          <h4 class="mb-3">село Карпівці<br>
+          6 км від Хмельницького
+          </h4>
+          <a class="btn btn-outline-light btn-lg" href="{% url 'bookingapier_rest' %}" target="_blank" role="button"
+          >ЗАМОВИТИ ПІРС</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+{% endblock %}
+
+{% block map %}
+
+      <div class="container px-0">
+        <div class="row content">
+
+        <div class="col-sm-8 sidenav">
+
+          {% autoescape off %}
+          <div class="container mt-3" id="container-map">
+          <!-- class "card-m" not active -->
+
+              <img class="card-m" id="card-map" src="{% static 'mainapp/images/map_satellite.jpeg' %}" alt="" style="width:98%;">
+
+              <div class="pier_1">
+                  Місце 1
+                  {% for p in pier_1 %}
+                    <p>{{p.pier_status}}</p>
+                  {% endfor %}
+              </div>
+
+              <div class="pier_2">
+                  Місце 2
+                  {% for p in pier_2 %}
+                    <p>{{p.pier_status}}</p>
+                  {% endfor %}
+              </div>
+              <div class="pier_3">
+                  Місце 3
+                  {% for p in pier_3 %}
+                    <p>{{p.pier_status}}</p>
+                  {% endfor %}
+              </div>
+
+          </div>
+          {% endautoescape %}
+
+        </div>
+
+        <!-- preview posts -->
+
+        <div class="col-sm-4">
+
+            <!-- head post -->
+            <div class="card preview_post mb-3 mt-3" id="card_main">   <!--style="max-width: 18rem;"-->
+                <div class="card-header">ГОЛОВНИЙ ДОПИС</div>
+            {% for p in head_posts %}
+                    {% if p.photo %}
+                        <img class="card-img" src="{{p.photo.url}}" alt="...">
+                    {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    {% autoescape off %}
+                        <p class="card-text"><a id="" href="{{ p.get_absolute_url }}" style="color: #d2dad0">{{p.content|linebreaks|truncatechars:100}}</a></p>
+                    {% endautoescape %}
+                    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читати допис</a></p>
+                </div>
+            {% endfor %}
+            </div>
+
+            <!-- news post -->
+            <div class="card preview_post mb-3 mt-3" id="card_news">   <!--style="max-width: 18rem;"-->
+                <div class="card-header">НОВИНИ</div>
+            {% for p in news_posts %}
+                    {% if p.photo %}
+                        <img class="card-img" src="{{p.photo.url}}" alt="...">
+                    {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    {% autoescape off %}
+                    <p class="card-text">
+                        <a id="main_title_text" href="{{ p.get_absolute_url }}" style="color: #d2dad0">
+                        {{p.content|linebreaks|truncatechars:100}}
+                        </a>
+                    </p>
+                    {% endautoescape %}
+                    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читати допис</a></p>
+                </div>
+            {% endfor %}
+            </div>
+            <!-- advert post -->
+            <div class="card preview_post mb-3 mt-3" id="card_advert">   <!--style="max-width: 18rem;"-->
+                <div class="card-header">ОГОЛОШЕННЯ</div>
+            {% for p in advert_posts %}
+                    {% if p.photo %}
+                        <img class="card-img" src="{{p.photo.url}}" alt="...">
+                    {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    {% autoescape off %}
+                        <p class="card-text">
+                            <a href="{{ p.get_absolute_url }}" style="color: #d2dad0">
+                            {{p.content|linebreaks|truncatechars:100}}
+                            </a>
+                        </p>
+                    {% endautoescape %}
+                    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читати допис</a></p>
+                </div>
+            {% endfor %}
+
+            </div>
+        </div>
+
+          <!-- advertisement_post block
+          <div class="card text-bg-dark">
+            {% for p in advert_posts %}
+                {% if p.photo %}
+                    <img class="card-img" src="{{p.photo.url}}" alt="...">
+                {% endif %}
+                <div class="card-img-overlay">
+                    <h2 class="card-title">{{ p.title }}</h2>
+                    {% autoescape off %}
+                        <p class="card-text">{{p.content|linebreaks|truncatechars:115}}</p>
+                    {% endautoescape %}
+                    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читати допис</a></p>
+                </div>
+            {% endfor %}
+          </div>
+          endblock advertisement_post  -->
+
+          <!--
+          <h4><small>RECENT POSTS</small></h4>
+          <hr>
+          <h2>I Love Food</h2>
+          <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
+          <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+          <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <br><br>
+
+          <h4><small>RECENT POSTS</small></h4>
+          <hr>
+          <h2>Officially Blogging</h2>
+          <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
+          <h5><span class="label label-success">Lorem</span></h5><br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <hr>
+
+          <h4>Leave a Comment:</h4>
+          <form role="form">
+            <div class="form-group">
+              <textarea class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+          <br><br>
+
+          <p><span class="badge">2</span> Comments:</p><br>
+
+          <div class="row">
+            <div class="col-sm-2 text-center">
+              <img src="bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+            </div>
+            <div class="col-sm-10">
+              <h4>Anja <small>Sep 29, 2015, 9:12 PM</small></h4>
+              <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <br>
+            </div>
+            <div class="col-sm-2 text-center">
+              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+            </div>
+            <div class="col-sm-10">
+              <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>
+              <p>I am so happy for you man! Finally. I am looking forward to read about your trendy life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <br>
+              <p><span class="badge">1</span> Comment:</p><br>
+              <div class="row">
+                <div class="col-sm-2 text-center">
+                  <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+                </div>
+                <div class="col-xs-10">
+                  <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>
+                  <p>Me too! WOW!</p>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+
+      </div>
+    </div>
+
+{% endblock %}
+
+
+

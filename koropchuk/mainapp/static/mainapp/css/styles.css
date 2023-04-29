@@ -1,0 +1,179 @@
+:root {
+
+    --color1: rgb(1,52,0); /* dark green,  */
+    --color2: 4f694e; /* green */
+    --color21: d0d8d0; /* light green */
+    --color3: rgb(18,139,2); /* bright green */
+
+    /*shades and tones of GREEN color block*/
+    --color1g: rgb(1,52,0); /* green very dark , #013400 */
+    --color2g: rgb(45,83,40); /* green dark, #2d5328 */
+    --color21g: rgb(36,67,33); /* green dark plus (outline), #244321 */
+    --color3g: rgb(85,115,79); /* green medium dark #55734f */
+    --color4g: rgb(125,148,120); /* green #7d9478 */
+    --color5g: rgb(167,183,163); /* green medium light #a7b7a3 */
+    --color6g: rgb(210,218,208); /* green light #d2dad0 */
+    --color7g: rgb(18,139,2); /* green bright */
+    /*endblock*/
+    --color1w: rgb(255,255,255); /* white, #fff */
+    --color1o: rgb(255,117,24); /* orange, #ff7518 */
+
+    --color4: #fff; /* white */
+    --color5: rgb(222,42,166); /* red-pink */
+}
+body, .dropdown-menu, nav, footer {
+/*    background-color: var(--color21); */
+    background-color: var(--color3g);
+}
+
+.dropdown-menu, .preview_post{
+    background-color: var(--color2g);
+}
+body, .nav-link, header, .bi, .btn-outline-success, .fr, footer {
+    color: var(--color6g);
+}
+
+.nav-link:hover, .bi:hover {
+    color: var(--color1w);
+}
+.bk {
+    color: var(--color1o);
+/*    -webkit-text-stroke-width: 0.1px;  обведення білим червоних букв: товщина*/
+/*    -webkit-text-stroke-color: var(--color4); обведення білим червоних букв: колір */
+}
+.card-title, .card-text, .text-white .mb-3 {
+    text-shadow: var(--color2g) 1px 0 10px;
+}
+.card-img {
+    opacity: 0.6;
+}
+
+/* block затемнення (прозорість) рамки зображення
+#container-map {
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: auto;
+  box-shadow: inset 0px 0px 10px 20px rgba(85,115,79,1);
+}
+#card-map {
+  height: auto;
+  width: auto;
+  position: relative;
+  z-index: -2;
+}
+ endblock */
+
+/* blink effect block */
+.fr {
+    animation: render 3s ease-in-out infinite;
+}
+@keyframes render {
+    0% {
+        color: rgba(18,139,2, 1);
+    }
+    50% {
+        color: rgba(18,139,2, 0.3);
+    }
+    100% {
+        color: rgba(18,139,2, 1);
+    }
+}
+/* endblock */
+
+a {
+    text-decoration: none;
+}
+#social_networks {
+    margin-bottom: 10px;
+}
+.bi, #login {
+    font-size: 2em;
+    margin-right: 12px;
+}
+
+footer .bi {
+    font-size: 1.5em;
+}
+
+footer .bi-youtube {
+    margin-right: none;
+}
+
+.btn-outline-success, .btn-outline-warning {
+    margin-right: 12px;
+}
+.btn-outline-success:hover {
+    transition-duration: 1s;
+}
+.nav-link:hover, .bi:hover {
+    transition-duration: 3s;
+}
+
+/* Container holding the image and the text */
+#container-map {
+    position: relative;
+    text-align: center;
+}
+.pier_1 {
+    position: absolute;
+    top: 5%;
+    left: 25%;
+}
+.pier_2 {
+    position: absolute;
+    top: 5%;
+    left: 45%;
+}
+.pier_3 {
+    position: absolute;
+    top: 5%;
+    left: 65%;
+}
+/* endcontainer */
+
+/* block test */
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+/*      background-color: #f1f1f1; */
+      height: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+/* endblock */
+
+#card-map {
+    border: 1px solid var(--color21g);
+    border-radius: 0.375rem;
+    height: 100%;
+}
+
+/*.preview_post {
+    height: 500px;
+}*/
+
+/* list numbering block */
+#container_post_doc ol  {
+   /* убираем стандартную нумерацию */
+   list-style: none;
+   /* Идентифицируем счетчик и даем ему имя li. Значение счетчика не указано - по умолчанию оно равно 0 */
+   counter-reset: li;
+}
+#container_post_doc li:before  {
+   /* Определяем элемент, который будет нумероваться — li. Псевдоэлемент before указывает, что содержимое, вставляемое при помощи свойства content, будет располагаться перед пунктами списка. Здесь же устанавливается значение приращения счетчика (по умолчанию равно 1). */
+   counter-increment: li;
+   /* С помощью свойства content выводится номер пункта списка. counters() означает, что генерируемый текст представляет собой значения всех счетчиков с таким именем. Точка в кавычках добавляет разделяющую точку между цифрами, а точка с пробелом добавляется перед содержимым каждого пункта списка */
+   content: counters(li, ".") ". ";
+}
+/* endblock */
+

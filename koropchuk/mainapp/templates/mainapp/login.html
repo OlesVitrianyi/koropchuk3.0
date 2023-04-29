@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+        <div id="container_post" class="container-md pt-5">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-3">
+                    <h1>{{ title }}</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                    <!--    {{ form.as_p }}-->
+                        <div class="form-error">{{ form.non_field_errors }}</div>
+
+                        {% for f in form %}
+                        <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+                        <div class="form-error">{{ f.errors }}</div>
+                        {% endfor %}
+
+                        <button type="submit">Увійти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+
+

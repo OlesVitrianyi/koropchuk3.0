@@ -1,0 +1,38 @@
+gmail
+log: koropchuk.com@gmail.com
+pass: Sjh8uP2ip
+phone: +380672686552
+alternative email: olesvitrianiy@gmail.com
+
+koropchuk.com/admin
+log: admin
+pass: Sjh8uP2ip
+
+log: PetroTest
+pass: Sjh8uP2ip
+
+colors
+https://encycolorpedia.com.ua/013400
+
+domain name
+https://www.ukraine.com.ua/uk/
+login: koropchuk.com@gmail.com
+pass: +96Sy(iV7x
+Ваш ID: 776275
+
+hosting
+https://www.pythonanywhere.com/
+Username: koropchuk
+email: koropchuk.com@gmail.com
+pass: xuxpon-5zIjka-guvbur
+
+credit card
+monobank
+Name on card: Chuk Volodymyr
+Address: 40/1 Zavodska St., 1 app.
+City/Town: Khmelnytskyi
+ZIP/Postal code: 29007
+Country: Ukraine
+Card number: 4441 1144 1000 9128
+Expiry/validity: 12/24
+

@@ -1,0 +1,382 @@
+{% load static %}
+{% load mainapp_tags %}
+<! ECOTYPE html>
+<html lang="uk">
+<head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8">
+    <!-- обов'язково для адаптивної верстки -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap 5 -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!--bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- CSS, розмістити в кінці для надання пріоритету стилів CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/styles.css' %}">
+</head>
+<body>
+<header>
+
+    <nav class="navbar navbar-expand-md navbar-dark"><!---->
+
+
+       <div class="container-fluid">
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'mainapp/images/logo/krpch_right.svg' %}" alt="КОРОПЧУК" width="120" height="auto">
+            <img class="mx-2" src="{% static 'mainapp/images/logo/krpch_name.svg' %}" alt="КОРОПЧУК" width="150"
+                 height="auto">
+        </a>
+        <!--<a class="navbar-brand" href="{% url 'home' %}">
+        </a>-->
+
+        <!--<a class="navbar-brand" href="#">КоропЧук</a>-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}">Головна</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'about' %}">Про нас</a>
+            </li>
+
+
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDoc" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Документи
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="color: #121773">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'contract' %}">Договір</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'rules' %}">Правила</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'instruction' %}">Інструкція</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="btn btn-outline-success mb-1" href="{% url 'bookingapier_rest' %}"  target="_blank" role="button">Бронювання</a>
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="btn btn-outline-warning mb-1" href="{% url 'information' %}" role="button">Інформація</a>-->
+
+                {% for p in advert_posts %}
+                <a class="btn btn-outline-warning mb-1" href="{{ p.get_absolute_url }}" role="button">Інформація</a>
+                {% endfor %}
+
+            </li>
+            <!--<li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>-->
+            <!--<li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>-->
+            <!--<li class="nav-item">
+              <a class="nav-link disabled">Disabled</a>
+            </li>-->
+          </ul>
+
+
+                {% if request.user.is_authenticated %}
+                {{ user.username }}, Ви увійшли до системи
+                    <a class="btn btn-outline-light m-2 " href="{% url 'logout' %}" role="button">Вийти</a>
+
+                {% else %}
+                Для бронювання місця потрібно увійти
+                <a class="btn btn-outline-light m-2" href="{% url 'login' %}" role="button">Увійти</a>
+                {% endif %}
+
+<!--          <div class="text-nowrap nav-link" id="social_networks">-->
+<!--            <a id="facebook_icon" href="https://www.facebook.com/Safety-Deposit-104183215596017" target="_blank">-->
+<!--                <i class="bi bi-facebook"></i>-->
+<!--            </a>-->
+            <!--<a id="instagram_icon" href="https://www.instagram.com/safety_deposit" target="_blank">
+                <i class="bi bi-instagram"></i>
+            </a>-->
+<!--            <a id="youtube_icon" href="https://www.youtube.com/channel/UCCfFwatiD1MUqXhY4FEsCjQ" target="_blank">-->
+<!--                <i class="bi bi-youtube"></i>-->
+<!--            </a>-->
+<!--          </div>-->
+
+<!--simple tag-->
+<!--{% getcats filter=1 %}-->
+          <!--<form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>-->
+        </div>
+      </div>
+    </nav>
+<!--inclusion tag-->
+<!--    {% show_categories cat_selected=cat_selected %}-->
+
+  <!-- Navbar -->
+  <!--<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarExample01"
+        aria-controls="navbarExample01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExample01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>-->
+  <!-- Navbar -->
+<!--      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');-->
+  <!-- Background image -->
+
+  {% block header_image %}
+  {% endblock %}
+
+</header>
+<!--<img id="img_test" src="{% static 'mainapp/images/logo/krch_logo_text.svg' %}" alt="КОРОПЧУК" width="170" height="119">-->
+
+
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>-->
+
+<!--<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'mainapp/images/logo/krch_logo_text.svg' %}" alt="КОРОПЧУК" width="170" height="119">
+        </a>
+            <a class="navbar-brand" href="index.html">
+                <img src="https://i.stack.imgur.com/n7aqK.png" lass="d-inline-block align-top" alt="Герб">
+                Сайт
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="line.html">Раздел 1 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Раздел 2
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Подраздел 1</a>
+                            <a class="dropdown-item" href="#">Подраздел 2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Раздел 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Раздел 4</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#signInModal">
+                            <i class="fas fa-sign-in-alt"></i> Войти
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>-->
+
+
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+    {% block map %}
+    {% endblock %}
+
+    {% block headpost %}
+    {% endblock %}
+
+
+
+    <!--block category
+        <ul>
+            {% if cat_selected == 0 %}
+                <li class="selected">Всі категорії</li>
+            {% else %}
+                <li><a href="{% url 'home' %}">Всі категорії</a></li>
+            {% endif %}
+
+            {% for c in cats %}
+                {% if c.pk == cat_selected %}
+                    <li class="selected">{{c.name}}</li>
+                {% else %}
+                    <li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+      -->
+
+    {% block content %}
+    {% endblock %}
+
+
+<!-- Footer -->
+<footer class="text-center text-lg-start"><!--bg-white text-muted-->
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Зв'яжіться з нами в соціальних мережах:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+<!--      <a href="" class="me-4">-->
+        <!--<i class="fab fa-facebook-f"></i>-->
+
+        <a href="" class="">
+          <i class="bi bi-facebook"></i>
+        </a>
+
+      <!--<a href="" class="me-4">
+        <i class="bi bi-instagram"></i>
+      </a>-->
+        <!--<i class="fab fa-instagram"></i>-->
+      <a href="" class="">
+        <i class="bi bi-youtube"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="fw-bold mb-4"><!--text-uppercase-->
+            <i class="fas fa-gem me-3"></i>КоропЧук
+          </h6>
+          <p>
+            Це рибацький клуб. Ми захоплені рибною лювлею і хочемо передати цю радість всім не охопленим цією пристрастю.
+              Рибалка - це "Коропчук"
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+<!--        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">-->
+<!--          &lt;!&ndash; Links &ndash;&gt;-->
+<!--          <h6 class="text-uppercase fw-bold mb-4">-->
+<!--            Послуги-->
+<!--          </h6>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Рибалка з пірсу</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Ночівля</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Пікнік</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Зоокуточок</a>-->
+<!--          </p>-->
+<!--        </div>-->
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+<!--        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">-->
+<!--          &lt;!&ndash; Links &ndash;&gt;-->
+<!--          <h6 class="text-uppercase fw-bold mb-4">-->
+<!--            Корисна інформація-->
+<!--          </h6>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Ціни</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Умови</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Договори</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="#!" class="text-reset">Допомога</a>-->
+<!--          </p>-->
+<!--        </div>-->
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Контакти</h6>
+          <p><i class="bi bi-geo-fill"></i> с. Карпівці, Хмельницький район, Хмельницька область, Україна, 31367</p><!--<i class="fas fa-home me-3"></i>-->
+          <p>
+            <i class="bi bi-envelope-fill"></i>
+            koropchuk.com@gmail.com
+          </p><!--<i class="fas fa-envelope me-3"></i>-->
+          <p><i class="bi bi-phone-fill"></i> + 38 067 407 3 555</p><!--<i class="fas fa-phone me-3"></i>-->
+<!--          <p><i class="fas fa-print me-3"></i> + 38 067 407 3 555</p> -->
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2022 , Риболовецький клуб "КоропЧук". Розробка сторінки: Творча група
+    <!--<a class="text-reset fw-bold" href="">sdp.com.ua</a>-->
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+    <!--підключення boootstrap стилів, вимога вкінці, перед закриттям /body (раніще розміщувалося одразу після body зверху) -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+</html>
